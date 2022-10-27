@@ -20,14 +20,14 @@
 
    ```bash
    ls -ahlt --color
-   ```
-There are 4 alterations to the `ls` command present in the code above, `-a` which shows all hidden files, `-h` which gives file size in human readable format, `-l` which gives the long file format to begin with and `-t` which gives the files in order of recency.
+   ``` 
+   There are 4 alterations to the `ls` command present in the code above, `-a` which shows all hidden files, `-h` which gives file size in human readable format, `-l` which gives the long file format to begin with and `-t` which gives the files in order of recency.
+
 2. Write bash functions `marco` and `polo` that do the following.
    Whenever you execute `marco` the current working directory should be saved in some manner, then when you execute `polo`, no matter what directory you are in, `polo` should `cd` you back to the directory where you executed `marco`.
    For ease of debugging you can write the code in a file `marco.sh` and (re)load the definitions to your shell by executing `source marco.sh`.
 
    **Solution:**
-
 `marco.sh`:
 
    ```bash
@@ -41,8 +41,7 @@ There are 4 alterations to the `ls` command present in the code above, `-a` whic
       cd "$MARCO"
    }
    ```
-
-`marco.sh` begins with a shebang line to find the bash execute file since they `marco()` and `polo()` are both bash funcions. The export command is used to make `MARCO` and environmental variable beyond just being accessible within the `marco()` function which allows `polo()` to "respond" in any other working directory. The `source` command is used to execute `marco.sh` since `./marco.sh` will not run due to permissions being denied.
+   `marco.sh` begins with a shebang line to find the bash execute file since they `marco()` and `polo()` are both bash funcions. The export command is used to make `MARCO` and environmental variable beyond just being accessible within the `marco()` function which allows `polo()` to "respond" in any other working directory. The `source` command is used to execute `marco.sh` since `./marco.sh` will not run due to permissions being denied.
 
 3. Say you have a command that fails rarely. In order to debug it you need to capture its output but it can be time consuming to get a failure run.
    Write a bash script that runs the following script until it fails and captures its standard output and error streams to files and prints everything at the end.
@@ -102,9 +101,12 @@ There are 4 alterations to the `ls` command present in the code above, `-a` whic
 
    **Solution:** 
 
-   Find the most recently modified file.
+   Find the most recently modified file:
    
+   `find . -type f -printf '%T@ %p\n' | sort -n | tail -1 | cut -d ' ' -f2`
 
-   List all files by recency.
+   List all files by recency:
+
+   `find . -type f -printf '%T@ %p\n' |sort -n | cut -d ' ' -f2`
 
    
